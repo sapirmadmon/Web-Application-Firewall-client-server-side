@@ -1,0 +1,173 @@
+<html>
+{% extends 'main/base_demo_site.html' %}
+
+{% block content %}
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+    .card {
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+          transition: 0.3s;
+          border-radius: 5px;
+          text-align: left;
+          margin-top: 130px;
+          padding:15px 25px 10px;
+          width: 50%;
+          background-color: #ffff;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    html, body, h1, h2, h3, h4, h5 {
+    font-family: "Montserrat", sans-serif
+    }
+
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      text-align: left;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+       -webkit-user-select: none;
+       -moz-user-select: none;
+       -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+      border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+      background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    input[type=submit] {
+          width: 40%;
+          background-color: #42659e;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          float: left;
+
+    }
+
+    input[type=submit]:hover {
+          background-color: #42659e;
+    }
+
+    .img {
+    padding-top: 80px;
+    float: right;
+    }
+
+    .table{
+    width: 100%;
+    text-align: left;
+    }
+
+    .note {
+    color: red;
+    font-size: 10px;
+    }
+</style>
+
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <center>
+            <div class="card">
+                <table class="table">
+                    <tr>
+                        <th rowspan="3">
+                            <h1>System Setup</h1>
+                            <br><br>
+                            <label class="container">With WAF
+                                <input type="radio" value="protection" name="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Without WAF
+                                <input type="radio" value="no_protection" name="radio">
+                                <span class="checkmark"></span>
+                            </label>
+
+                            <br>
+                            <label type="quantity">XSS Threshold </label>
+                            <input type="number" id="threshold_xss" step="0.01" name="threshold_xss" min="0" max="1">
+                            <label class="note">Default 0.4</label>
+                            <br>
+                            <label type="quantity">SQL Injection Threshold&nbsp </label>
+                            <input type="number" id="threshold_sql" step="0.01" name="threshold_sql" min="0" max="1">
+                            <label class="note">Default 0.5</label>
+
+                            <h6 class="note">The threshold that is closer to 0 means that it is more sensitive to attack detections,<br>
+                                the threshold that is closer to 1 means that it is less sensitive to attack detections.
+                            </h6>
+                            <input type="submit" class="h" value="Start">
+                        </th>
+                        <th>
+
+                        </th>
+                        <th rowspan="3">
+                            <img src="/static/image/setup1.png" class="img" width="250" height="250">
+                        </th>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                </table>
+            </div>
+        </center>
+    </form>
+</body>
+{% endblock %}
+</html>

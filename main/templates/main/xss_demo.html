@@ -1,0 +1,120 @@
+<!doctype html>
+{% extends 'main/base_demo_site.html' %}
+<html lang="en">
+{% block title %}
+    XSS
+{% endblock %}
+<!--<html>-->
+{% block content %}
+<head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+    th, td {
+      padding-left: 10px;
+      padding-top: 10px;
+      text-align: left;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      border-radius: 5px;
+      text-align: left;
+      margin-top: 130px;
+      padding:1px 20px;
+      width: 50%;
+      background-color: #ffff;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    .container {
+      padding: 2px 16px;
+    }
+
+    html, body, h1, h2, h3, h4, h5 {font-family: "Montserrat", sans-serif}
+
+    .h {
+    font-family: "Montserrat", sans-serif
+    }
+
+    input[type=text], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type=submit] {
+      width: 15%;
+      background-color: #42659e;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+      background-color: #42659e;
+    }
+
+
+</style>
+</head>
+<body>
+<center>
+    <form id="form" class="form-signin" method="POST" action="/demo_site/xss">
+        {% csrf_token %}
+        <div class="card">
+            <div class="container">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td><h2><b>Hello!</b></h2></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="/static/image/user.png" width="70" height="70">
+                        </td>
+                        <td>
+                            <input type="text" class="h" name="txtName" size="70" placeholder="How do you feel today?" required autofocus>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" class="h" value="Post">
+                        </td>
+                    </tr>
+
+                </table>
+                <br>
+            </div>
+        </div>
+        <br>
+        <br>
+        <label id="lblName">  </label>
+    </form>
+
+    </center>
+
+    <script type="text/javascript">
+        function CopyToLabel() {
+            let lblName = document.getElementById("lblName")
+            lblName.innerHTML = document.getElementById("txtName").value
+            console.log("ad!")}
+
+
+    </script>
+
+    </body>
+{% endblock %}
+</html>

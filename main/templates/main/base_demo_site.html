@@ -1,0 +1,91 @@
+<html>
+<head>
+	<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+	 body {
+          background-color: #e6e4df;
+          background-size: 1370px 730px;
+          background-repeat: no-repeat;
+          background-position: right;
+          background-attachment: fixed;
+          font-family: 'Montserrat', sans-serif;
+          <!--background-image: url("/static/image/background3.jpg");-->
+
+     }
+
+	.sidenav {
+		height:100%;
+		width:12%;
+		position: fixed;
+		z-index:1;
+		top:0;
+		left:0;
+		background-color:#111;
+		overflow-x: :hidden;
+		padding-top: 20px;
+	}
+
+	.sidenav a {
+		padding:6px 8px 6px 16px;
+		text-decoration: none;
+		font-size: 20px;
+		text-decoration: underline;
+		color: #818181;
+		display:block;
+	}
+
+	.sidenav a:hover{
+		color:#f1f1f1;
+	}
+
+	.alert {
+      height: 40px;
+      width: 100%;
+      text-align: center;
+      color: #f70f07;
+      background-color: #e6e4df;
+    }
+
+	.h {
+	  text-color: #111;
+	}
+
+	.message_waf {
+	  padding-left: 16px;
+	  height: 40px;
+      width: 78%;
+      color: #f70f07;
+	  font-size: 16px;
+
+	}
+
+	</style>
+
+	<title>{% block title %} WAF System - Demo site {% endblock %} </title>
+</head>
+
+<body>
+	{% if messages %}
+      {% for message in messages %}
+        <div align="center" class="alert">
+				<h3 class="h"> {{ message }} </h3>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+	<div class="sidenav">
+		<a href="/demo_site/sql">Sql Injection</a>
+		<a href="/demo_site/xss">Reflected XSS</a>
+		<a href="/demo_site/search">Stored XSS</a>
+        <a href="/">CSRF</a>
+        <a href="/demo_site">Setting</a>
+		<p class="message_waf"> {{ message_waf }} </p>
+	</div>
+
+
+	{% block content %}
+	{% endblock %}
+
+</body>
+</html>

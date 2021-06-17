@@ -1,0 +1,33 @@
+<!doctype html>
+{% extends 'main/base.html' %}
+
+<html lang="en">
+  <head>
+
+
+{% block title %}
+    WAF System - HomePage
+{% endblock %}
+
+
+</head>
+
+<body>
+
+{% block pageheader %}
+
+<div class="centered">
+    <div class="title">
+        WAF SYSTEM
+    </div>
+
+    {% if user.is_superuser %}
+            <div class="btn_export">
+                <a class="btn btn-outline-secondary" href="/export_logger_csv">Export Report Logger</a>
+            </div>
+    {% endif %}
+</div>
+
+{% endblock %}
+  </body>
+</html>

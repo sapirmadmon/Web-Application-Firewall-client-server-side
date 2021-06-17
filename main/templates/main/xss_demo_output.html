@@ -1,0 +1,88 @@
+<!doctype html>
+{% extends 'main/base_demo_site.html' %}
+<html lang="en">
+{% block title %}
+    XSS Output
+{% endblock %}
+
+{% block content %}
+<head>
+    <style>
+    th, td {
+      padding-left: 10px;
+      padding-top: 10px;
+      text-align: left;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      border-radius: 5px;
+      text-align: left;
+      margin-top: 130px;
+      padding:1px 20px;
+      width: 50%;
+      background-color: #ffff;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    .container {
+      padding: 2px 16px;
+    }
+
+    html, body, h1, h2, h3, h4, h5 {font-family: "Montserrat", sans-serif}
+
+    .h {
+    font-family: "Montserrat", sans-serif
+    }
+
+    </style>
+</head>
+
+<body>
+    <center>
+        <form id="form" class="form-signin" method="POST">
+            {% csrf_token %}
+            <div class="card">
+            <div class="container">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="/static/image/user.png" width="70" height="70">
+                        </td>
+                        <td>
+                            <label id="lblName"> {{ text|safe }} </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <!--<input type="submit" class="h" value="Post">-->
+                        </td>
+                    </tr>
+
+                </table>
+                <br>
+            </div>
+        </div>
+
+
+
+
+            <!--<br>-->
+            <!--<h2>-->
+                <!--<label id="lblName"> {{ text }} </label>-->
+            <!--</h2>-->
+        </form>
+    </center>
+</body>
+{% endblock %}
+</html>
+

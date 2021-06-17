@@ -1,0 +1,191 @@
+{% extends 'main/base_demo_site.html' %}
+
+
+{% block title %}
+    Sql injection
+{% endblock %}
+<html>
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Montserrat', sans-serif;
+        height: 100vh;
+        margin: -20px 0 50px;
+    }
+
+
+    button {
+        border-radius: 20px;
+        border: 1px solid #42659e;
+        background-color: #42659e;
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 12px 45px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: transform 80ms ease-in;
+    }
+
+    button:active {
+        transform: scale(0.95);
+    }
+
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 50px;
+        height: 100%;
+        text-align: center;
+    }
+
+    input {
+        background-color: #eee;
+        border: none;
+        padding: 12px 15px;
+        margin: 8px 0;
+        width: 100%;
+    }
+
+    .container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+                0 10px 10px rgba(0,0,0,0.22);
+        position: relative;
+        overflow: hidden;
+        width: 900px;
+        max-width: 100%;
+        min-height: 530px;
+    }
+
+    .sign-in-container {
+        left: 0;
+        width: 50%;
+        z-index: 2;
+    }
+
+    .overlay-container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 100;
+    }
+
+    .overlay {
+        background: #FF416C;
+        background: -webkit-linear-gradient(to right, #5897fc, #0b2247);
+        background: linear-gradient(to right, #5897fc, #0b2247);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 0 0;
+        color: #FFFFFF;
+        position: relative;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .overlay-panel {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 40px;
+        text-align: center;
+        top: 0;
+        height: 100%;
+        width: 50%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .overlay-right {
+        right: 0;
+        transform: translateX(0);
+    }
+
+    input[type=text], select {
+      width: 90%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      <!--border: 1px solid #ccc;-->
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type=password], select {
+          width: 20%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+    input[type=submit] {
+          width: 15%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+    input[type=submit]:hover {
+          background-color: #45a049;
+        }
+
+</style>
+<body>
+        <form id="form" method="POST">
+            {% csrf_token %}
+            <div class="container" id="container">
+                <div class="form-container sign-in-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-right">
+                            <h1>Hello, Friend!</h1>
+                            <p>Enter your personal details and start journey with us</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlay-container">
+                    <br><br><br>
+                    <h1><b> Sign in </b></h1>
+                    <br><br>
+                    <input type="text" id="inputUsername" placeholder="User Name" name="username" required autofocus>
+                    <br>
+                    <input type="text" id="inputPassword" placeholder="Password" name="password" required autofocus>
+                    <br><br>
+                    <button>Sign In</button>
+                </div>
+            </div>
+        </form>
+
+</body>
+{% endblock %}
+</html>

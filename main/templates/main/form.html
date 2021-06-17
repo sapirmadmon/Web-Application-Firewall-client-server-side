@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% extends 'main/base_demo_site.html' %}
+
+<html lang="en">
+<head>
+    <!--<meta charset="UTF-8">-->
+    <title>Title</title>
+    {% block content %}
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+        .h {
+        font-family: "Montserrat", sans-serif
+        }
+
+        #customers {
+          border-collapse: collapse;
+          width: 87%;
+        }
+
+        #customers td, #customers th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #10386e;
+          color: white;
+        }
+    </style>
+</head>
+<body>
+    <table align="right" id="customers">
+        <thead>
+            <tr>
+                <th scope="col" class="h">User Name</th>
+                <th scope="col" class="h">First Name</th>
+                <th scope="col" class="h">Last Name</th>
+                <th scope="col" class="h">Email</th>
+                <th scope="col" class="h">Last Login</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td class="h">{{ user.username }}</td>
+                    <td class="h">{{ user.first_name }}</td>
+                    <td class="h">{{ user.last_name }}</td>
+                    <td class="h">{{ user.email }}</td>
+                    <td class="h">{{ user.last_login }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}
+</html>
